@@ -1,13 +1,17 @@
 import random
 import time
 
-# Krishna quotes
+# ===============================
+# Krishna AI Chatbot 💙
+# ===============================
+
+# Quotes
 quotes = [
     "You have the right to perform your duty, but not to the fruits of your actions.",
     "Set your heart upon your work but never on its reward.",
     "A person can rise through the efforts of their own mind.",
     "Calmness, gentleness, silence, self-restraint are qualities of a wise person.",
-    "Change is the law of the universe.",
+    "Change is the law of the universe."
 ]
 
 # Mood keywords
@@ -17,61 +21,80 @@ moods = {
     "happy": ["happy", "good", "great", "excited"]
 }
 
-# Funny Krishna-style lines
+# Fun lines
 fun_lines = [
-    "Even Arjuna had doubts 😄 but he still fought!",
-    "Maybe it's time for some chai ☕ and then back to work!",
-    "Krishna believes in you 💙 do you?",
+    "Even Arjuna had doubts, but he still moved forward!",
+    "Take a short break and come back stronger.",
+    "Krishna believes in you. Keep going!"
 ]
 
+# Typing effect
 def typing_effect(text):
     for char in text:
         print(char, end="", flush=True)
-        time.sleep(0.02)
+        time.sleep(0.01)
     print()
 
+# Detect mood
 def get_mood(user):
     for mood, words in moods.items():
-        if any(word in user for word in words):
-            return mood
+        for word in words:
+            if word in user:
+                return mood
     return "neutral"
 
+# Generate reply
 def krishna_reply(user, name):
     mood = get_mood(user)
 
     if mood == "sad":
-        return f"{name}, why sadness? 🌸 " + random.choice(quotes)
+        return name + ", do not be disheartened. " + random.choice(quotes)
 
     elif mood == "stress":
-        return f"{name}, focus on your karma, not results 🌿 " + random.choice(quotes)
+        return name + ", focus on your duty, not the results. " + random.choice(quotes)
 
     elif mood == "happy":
-        return f"That’s wonderful, {name}! 😊 Keep shining!"
+        return "That's great to hear, " + name + "! Keep smiling."
 
     elif "bored" in user:
         return random.choice(fun_lines)
 
+    elif "exam" in user:
+        return name + ", do your best without fear. Results will follow."
+
+    elif "failure" in user:
+        return name + ", failure is a step towards success. Learn and move forward."
+
+    elif "motivate" in user:
+        return name + ", believe in yourself. You are stronger than you think."
+
+    elif "help" in user:
+        return "You can talk about stress, sadness, exams, motivation, or just say hello!"
+
     elif "who are you" in user:
-        return "I am Krishna AI, your friend and guide 💙"
+        return "I am Krishna AI, your guide and friend."
 
     elif "hello" in user or "hi" in user:
-        return f"Radhe Radhe {name} 💙 What’s on your mind?"
+        return "Radhe Radhe " + name + "! How can I help you today?"
 
     else:
         return random.choice(quotes)
 
+# ===============================
+# Main Program
+# ===============================
 
-# Start chatbot
-print("🌟 Krishna AI Chatbot 🌟")
-name = input("Krishna AI: What is your name? ")
+print("🌟 Welcome to Krishna AI Chatbot 🌟")
+print("Type 'exit' anytime to stop")
 
-typing_effect(f"Radhe Radhe {name} 💙 I am here for you.")
+name = input("Enter your name: ")
+typing_effect("Radhe Radhe " + name + ". I am here to guide you.")
 
 while True:
-    user = input(f"{name}: ").lower()
+    user = input(name + ": ").lower()
 
     if user == "exit":
-        typing_effect("Krishna AI: Goodbye 🌸 Stay blessed!")
+        typing_effect("Goodbye " + name + ". Stay positive and keep learning!")
         break
 
     response = krishna_reply(user, name)
